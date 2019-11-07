@@ -67,7 +67,7 @@ def format(format, maxLen, str):
     for c in str:
         if re.findall(r'[\u4e00-\u9fff\u3400-\u4dbf\u3040-\u30ff]', c):
             maxLen -= 1
-    return format.format(str, maxLen)
+    return format.format(str, max(maxLen,1))
 
 class LimitedRange():
     def __init__(self, maxSize, val = 0):
