@@ -91,7 +91,7 @@ class ApiSession():
     def __init__(self):
         super().__init__()
         self.session = requests.Session()
-        self.accessToken = self.session.get("https://open.spotify.com/access_token?reason=transport&productType=web_player").json()["accessToken"]
+        self.accessToken = self.session.get("https://open.spotify.com/get_access_token?reason=transport&productType=web_player").json()["accessToken"]
 
     def query(self, url, args={}):
         selectedIdx = 0
