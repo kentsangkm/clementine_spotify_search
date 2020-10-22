@@ -67,7 +67,7 @@ def format(format, maxLen, str):
     for c in str:
         if re.findall(r'[\u4e00-\u9fff\u3400-\u4dbf\u3040-\u30ff]', c):
             maxLen -= 1
-    return format.format(str, max(maxLen,1))
+    return format.format(str, max(maxLen, 1))
 
 class LimitedRange():
     def __init__(self, maxSize, val = 0):
@@ -326,11 +326,11 @@ class SongList(BasicPage):
       <album>{}</album>
     </track>""".format(
                 song["uri"],
-                song["name"],
-                song["artists"],
+                escape(song["name"]),
+                escape(song["artists"]),
                 song["duration_ms"],
                 song["track_number"],
-                song["album"]
+                escape(song["album"])
             ))
         file.write("""</trackList></playlist>""")
         file.close()
@@ -340,6 +340,9 @@ class SongList(BasicPage):
         if ch == 'A' or ch == 'a':
             return self.addAll
         return None
+
+def escape(txt):
+    return txt.replace("&", "&amp;")
 
 class Search(BasicPage):
     def __init__(self, obj):
